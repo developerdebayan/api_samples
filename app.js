@@ -46,7 +46,7 @@ app.use((req, res, next) => {
     });
   });
 
-mongoose.connect("mongodb+srv://admin:4GX9s1mCP04FoG39@apisamplecluster.04sxvrc.mongodb.net/?retryWrites=true&w=majority").then(()=>{
+mongoose.connect("mongodb+srv://ADMIN:o5sySasuH67PEWxc@cluster0.9cbe0k0.mongodb.net/?retryWrites=true&w=majority").then(()=>{
     app.listen(PORT,()=> {
         console.log("Listening to port " + PORT);
     });
@@ -54,6 +54,6 @@ mongoose.connect("mongodb+srv://admin:4GX9s1mCP04FoG39@apisamplecluster.04sxvrc.
     console.log(err);
 });
 
-//admin
-//4GX9s1mCP04FoG39
+//ADMIN
+//o5sySasuH67PEWxc
 

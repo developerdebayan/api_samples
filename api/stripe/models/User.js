@@ -1,6 +1,29 @@
 const mongoose = require("mongoose");
+const connection = require('../../../server');
 const Schema = mongoose.Schema;
 
+const addressSchema = new mongoose.Schema({
+    line1: {
+        type: String,
+        required: true
+    },
+    postalCode: {
+        type: String,
+        required: true
+    },
+    city: {
+        type: String,
+        required: true
+    },
+    state: {
+        type: String,
+        required: true
+    },
+    country: {
+        type: String,
+        required: true
+    },
+  });
 
 const userSchema = new Schema({
     name: {
@@ -15,12 +38,15 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-        minLength: 6
     },
     customerId: {
         type: String,
         required: true,
-    }
+    },
+    address: {
+        type : addressSchema,
+        required : true
+    },
 });
 
-module.exports = mongoose.model("User",userSchema);
+module.exports = connection.stripeApi.model("User", userSchema);

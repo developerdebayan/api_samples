@@ -1,4 +1,4 @@
-const stripe = require('stripe')('sk_test_51JdVaeSDOQyPPB1oMacRQUhlYDVpWyklBJJjFibrncku0TX01qalL2mMYyqs8qpgjcPw2Ngrz7SCwls1wlg7LBjt00e2t72XEm');
+const stripe = require('stripe')('sk_test_51MiZC7SI2gwOiSTR1vRVoVd2SEe6EaIGo3TVIKW8650QVGZYkbQR2g9ifXtChnkogaSaAF0nmQKJKF4XcJmmVdEE006dpFQ8M3');
 const User = require("../models/User");
 const { ObjectId } = require('mongodb');
 
@@ -36,7 +36,7 @@ exports.login = async (req, res) => {
 }
 
 exports.register = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, address, city, state, country, postalCode } = req.body;
     try {
         let existingUser = await User.findOne({ email: email });
         if (existingUser != null) {
@@ -49,12 +49,26 @@ exports.register = async (req, res) => {
             const customer = await stripe.customers.create({
                 name: name,
                 email: email,
+                address: {
+                    line1: address,
+                    postal_code: postalCode,
+                    city: city,
+                    state: state,
+                    country: country,
+                },
             });
             let user = new User({
                 name: name,
                 email: email,
                 password: password,
-                customerId: customer.id
+                customerId: customer.id,
+                address: {
+                    line1: address,
+                    postalCode: postalCode,
+                    city: city,
+                    state: state,
+                    country: country,
+                },
             });
             user = await user.save();
             return res.status(201).json({
@@ -88,6 +102,7 @@ exports.paymentRequest = async (req, res) => {
             const paymentIntent = await stripe.paymentIntents.create({
                 amount: amount,
                 currency: currency,
+                description: 'Order payment test',
                 customer: existingUser.customerId,
                 automatic_payment_methods: {
                     enabled: true,
