@@ -1,7 +1,7 @@
 
 # API SAMPLES
 
-## Getting Started
+
 
 ## STRIPE API
 
