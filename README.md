@@ -66,7 +66,7 @@ Response
         }
     }
 
-### Login API
+### Payment Request API
 
 Method : POST
 
