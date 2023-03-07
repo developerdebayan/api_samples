@@ -17,8 +17,12 @@ Request (FORM DATA) :
 
     "name" : "Debayan Chowdhury",
     "email" : "debayan@gmail.com",
-    "password" : "123456"
-
+    "password" : "123456",
+    "address" : "Chinsurah",
+    "city" : "Kolakata",
+    "state" : "West Bengal",
+    "country" : "India",
+    "postalCode" : "712101",
 
 Response 
 
