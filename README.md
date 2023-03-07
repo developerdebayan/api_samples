@@ -1,7 +1,9 @@
 
-# Todo API
+# API SAMPLES
 
 ## Getting Started
+
+## STRIPE API
 
 ### Register API
 
