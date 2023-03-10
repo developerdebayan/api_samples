@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const StripeRouter = require("./api/stripe/routes/stripe_route");
+const PlaidRouter = require("./api/plaid/routes/plaid_route");
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use('/check',  (req, res) => {
 
 
 app.use('/stripe',StripeRouter);
+app.use('/plaid',PlaidRouter);
 
 
 
