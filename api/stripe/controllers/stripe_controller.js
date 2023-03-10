@@ -174,16 +174,28 @@ exports.paymentRequest = async (req, res) => {
                     message: "Opertation failed"
                 }); l̥
             } else {
-                return res.status(200).json({
-                    statusCode: 200,
-                    status: 1,
-                    message: "",
-                    data: {
+                let data = {};
+                if (merchant_country === 'INDIA'){
+                    data = {
+                        paymentIntent: paymentIntent.client_secret,
+                        ephemeralKey: ephemeralKey.secret,
+                        customerId: existingUser.customerId.customerId_INDIA,
+                        publishableKey: PUBLISHABLE_KEY_INDIA,
+                    }
+                }else if(merchant_country === 'USA'){
+                    data = {
                         paymentIntent: paymentIntent.client_secret,
                         ephemeralKey: ephemeralKey.secret,
                         customerId: existingUser.customerId.customerId_USA,
                         publishableKey: PUBLISHABLE_KEY_USA,
                     }
+                }
+
+                return res.status(200).json({
+                    statusCode: 200,
+                    status: 1,
+                    message: "",
+                    data: data
                 });
             }
         } else {
